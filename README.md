@@ -36,8 +36,8 @@ After the training is complete, you will see checkpoint data created in the desi
 1. Open a new CMD terminal in vscode, and run test-app:<br/>
    ![image](https://user-images.githubusercontent.com/28804769/175769726-bbbfed1f-0e04-423a-ba53-d87da8aa91e1.png)
 
-When the application runs, you will see this application:
-![image](https://user-images.githubusercontent.com/28804769/175769743-d969c82f-42dd-4627-bf8d-99a5a8d60312.png)
+When the application runs, you will see this application:<br/>
+<img src="https://user-images.githubusercontent.com/28804769/175769743-d969c82f-42dd-4627-bf8d-99a5a8d60312.png" alt="app-view" width="300"/><br/>
 Now you can select an image and click 'check'. The results are printed to the console, from which you ran the application:<br/>
 ![image](https://user-images.githubusercontent.com/28804769/175769792-b589dc8e-ab21-4b9a-85d2-a8f167bae2fb.png)
 
