@@ -9,7 +9,7 @@ import numpy as np
 from model1 import VanillaNN as PredictionModel
 
 app = Flask(__name__)
-model = PredictionModel.create_prediction_model("173338")
+model = PredictionModel.create_prediction_model("164453")
 
 @app.route("/", methods = [ "GET" ])
 def home():
