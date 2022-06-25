@@ -117,9 +117,6 @@ venv.bak/
 # Rope project settings
 .ropeproject
 
-# mkdocs documentation
-/site
-
 # mypy
 .mypy_cache/
 .dmypy.json
@@ -127,3 +124,23 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+/__pycache__
+*.bin
+/site/checkpoints
+/site/checkpoints
+/site/checkpoints
+wandb/
