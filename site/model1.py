@@ -88,7 +88,7 @@ class VanillaNN(keras.Model):
         model.load_weights(checkpoint_path)
         return model
 
-    def get_checkpoint_path(self, suffix = None):
+    def get_checkpoint_path(self, suffix = ""):
         '''
         Get a checkpoint path ending with the given suffix.
         Use this to ensure consistency when defining checkpoints.

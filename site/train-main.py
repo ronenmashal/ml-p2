@@ -3,7 +3,7 @@ This is the place where we will train the models. It loads the dataset,
 configure W&B and eventually save the trained weights as checkpoints. 
 '''
 
-import datetime
+from datetime import datetime
 import os
 from gc import callbacks
 import tensorflow as tf
@@ -30,14 +30,14 @@ validation_labels = train_labels[:5000]
 
 n_labels = len(set(validation_labels))
 
-cp_folder = os.path.join(model.get_checkpoint_path(),  datetime.now().strftime("%H%M%S"))
-#os.makedirs(cp_folder, exist_ok = True)
+timestamp = datetime.now().strftime("%H%M%S")
+cp_folder = model.get_checkpoint_path(timestamp)
+
 # Create a callback that saves the model's weights
 cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=cp_folder, save_weights_only=True, verbose=1)
 
-#wandb.init(project=f"P2-{model.name}", name = "Train", notes = "Training the model as taken from Ex 8.", config = config)
-#config = wandb.config
-#model.fit(train_images, train_labels, epochs = config["epochs"], callbacks = [WandbCallback(), cp_callback]) # input_type = "image", labels = train_labels
-
-model.fit(train_images, train_labels, epochs = config["epochs"], callbacks = [cp_callback]) # input_type = "image", labels = train_labels
+wandb.init(project=f"P2-{model.name}", entity="ml-p2", name=f"{model.name}-{timestamp}" , 
+    notes = f"Training model {model.name} @{timestamp}", config = config)
+config = wandb.config
+model.fit(train_images, train_labels, epochs = config["epochs"], callbacks = [WandbCallback(), cp_callback])
 
