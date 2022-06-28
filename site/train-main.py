@@ -36,8 +36,15 @@ cp_folder = model.get_checkpoint_path(timestamp)
 # Create a callback that saves the model's weights
 cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=cp_folder, save_weights_only=True, verbose=1)
 
-wandb.init(project=f"P2-{model.name}", entity="ml-p2", name=f"{model.name}-{timestamp}" , 
+run = wandb.init(project=f"P2-{model.name}", entity="ml-p2", name=f"{model.name}-{timestamp}" , 
     notes = f"Training model {model.name} @{timestamp}", config = config)
 config = wandb.config
+artifact = wandb.Artifact('animals', type='dataset')
+#run.log_artifact("fashion_mnist")
 model.fit(train_images, train_labels, epochs = config["epochs"], callbacks = [WandbCallback(), cp_callback])
 
+train_evaluation = model.evaluate(train_images, train_labels)
+test_evaluation = model.evaluate(test_images, test_labels)
+
+print("Train evaluation:", train_evaluation)
+print("Test evaluation:", test_evaluation)
