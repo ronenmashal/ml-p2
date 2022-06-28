@@ -1,4 +1,4 @@
-FROM ml-project-base:1.0.0
+FROM ml-project-base
 EXPOSE 5000
 WORKDIR /app
 COPY ./site .
