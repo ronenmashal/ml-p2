@@ -73,7 +73,7 @@ class VanillaNN(keras.Model):
         Also, for the purpose of training, the model is compiled with 'adam' optimization.
         '''
         model = VanillaNN._create_model(config["dropout_rate"])
-        model.compile(loss=keras.losses.SparseCategoricalCrossentropy(from_logits=False), optimizer='adam')
+        model.compile(loss=keras.losses.SparseCategoricalCrossentropy(from_logits=False), optimizer='adam', metrics = ['accuracy'])
         return model
 
     @staticmethod    
