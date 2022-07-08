@@ -6,6 +6,7 @@ import numpy as np
 # import with the module of the new model. Also, make sure it has the same static and private
 # functions as VanillaNN.
 #
+import tensorflow
 from model1 import VanillaNN as PredictionModel
 
 app = Flask(__name__)
