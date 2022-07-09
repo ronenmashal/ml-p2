@@ -144,3 +144,4 @@ dmypy.json
 /site/checkpoints
 /site/checkpoints
 wandb/
+*.npz
