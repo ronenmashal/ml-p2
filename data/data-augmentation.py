@@ -4,8 +4,12 @@ from keras.utils import img_to_array
 #from keras.preprocessing.image import ImageDataGenerator
 from keras_preprocessing_my_image import ImageDataGenerator
 import matplotlib.pyplot as plt
+import pathlib
 
-img = load_img('golden_retriever.jpg')
+
+current_dir = pathlib.Path(__file__).parent.resolve()
+
+img = load_img(f'{current_dir}\\golden_retriever.jpg')
 data = img_to_array(img)
 samples = expand_dims(data, 0)
 '''
