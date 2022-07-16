@@ -1,9 +1,8 @@
 import tensorflow as tf
 import numpy as np
 from PIL import Image as im
-from model1 import VanillaNN as PredictionModel
 import os
-
+import wandb_helpers as wbh
 
 img_idx = 23
 img_file_name = f"image{img_idx}.bin"
