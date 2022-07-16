@@ -145,3 +145,5 @@ dmypy.json
 /site/checkpoints
 wandb/
 *.npz
+saved-models/
+artifacts/
