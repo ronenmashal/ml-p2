@@ -1,16 +1,14 @@
 from flask import Flask 
 from flask import request, jsonify
 import numpy as np
-
-# If you want to change the model used by the web-service to predict the label, replace this
-# import with the module of the new model. Also, make sure it has the same static and private
-# functions as VanillaNN.
-#
-import tensorflow
-from model1 import VanillaNN as PredictionModel
+import tensorflow as tf
+from tensorflow import keras
+import os
 
 app = Flask(__name__)
-model = PredictionModel.create_prediction_model("164453")
+
+local_dir = os.path.dirname(os.path.abspath(__file__))
+model = keras.models.load_model(f"{local_dir}\\work-model.h5")
 
 @app.route("/", methods = [ "GET" ])
 def home():
@@ -32,3 +30,21 @@ def predict():
 def validation_error(message):
     return jsonify({ "error": message })
 
+class_names = ["T-shirt/top","Trouser","Pullover","Dress","Coat","Sandal","Shirt","Sneaker","Bag","Ankle boot"]
+
+def predict_image_label(model, image):
+    '''
+    Predict a label based on a given image.
+    The image must be an array of uint8, containing 28 * 28 = 784 items. 
+    The shape does not matter. It will be reshaped to the necessary form.
+    '''
+    image = image / 255.0
+    image = image.reshape([1, 28, 28])
+    predictions = model.predict(image)
+    label_idx = np.argmax(predictions[0])
+    prediction = {
+        "label id": label_idx,
+        "label": class_names[label_idx],
+        "certainty": predictions[0][label_idx]
+    }
+    return prediction

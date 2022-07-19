@@ -1,8 +1,9 @@
 import tensorflow as tf
+from tensorflow import keras
 import numpy as np
 from PIL import Image as im
-from model1 import VanillaNN as PredictionModel
 import os
+from app import model, predict_image_label
 
 
 img_idx = 23
@@ -16,6 +17,5 @@ else:
     with open(img_file_name, "rb") as file:
         img = np.load(file)
 
-model = PredictionModel.create_prediction_model("173338")
-prediction = model.predict_image_label(img)
+prediction = predict_image_label(model, img)
 print (prediction)
