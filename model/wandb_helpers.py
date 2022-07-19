@@ -38,3 +38,17 @@ def save_model(wandb_run, model, config, model_name, model_description):
     model_artifact = wandb.Artifact(model_name, type = "model", description=model_description, metadata= dict(config))
     model_artifact.add_dir(model_file)
     wandb_run.log_artifact(model_artifact)
+
+def load_best_model(sweep_id):
+    api = wandb.Api()
+    sweep = api.sweep(f"ml-p2/ml-p2/{sweep_id}")
+    runs = sorted(sweep.runs,
+        key=lambda run: run.summary.get("val_accuracy", 0), reverse=True)
+    val_acc = runs[0].summary.get("val_accuracy", 0)
+    print(f"Best run {runs[0].name} with {val_acc} validation accuracy")
+
+    model_file = runs[0].file("model-best.h5").download(replace=True)
+    model_file.close()
+
+if (__name__ == "__main__"):
+    load_best_model("6zmewzd0")
