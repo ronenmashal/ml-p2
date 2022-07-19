@@ -13,8 +13,11 @@ def start_wandb_run(model_name, config):
     return wandb.init(project=f"ml-p2", entity="ml-p2", name=f"{model_name}-{timestamp}" , 
         notes = f"Training FCNN model @{timestamp}", config = config)
 
-
 def read_datasets(wandb_run, dataset_tag = "latest"):
+    '''
+    Read all datasets from W&B.
+    Usage example: train_set, validation_set, test_set = wbh.read_datasets(run)
+    '''
     artifact = wandb_run.use_artifact(f'ml-p2/ml-p2/fashion-mnist:{dataset_tag}', type='dataset')
     data_dir = artifact.download()
     return [ read_dataset(data_dir, ds_name) for ds_name in dataset_names ]
@@ -24,7 +27,7 @@ def read_dataset(data_dir, ds_name):
     data = np.load(os.path.join(data_dir, filename))
     return Dataset(images = data["x"], labels = data["y"])
 
-def read_model(wandb_run, model_name, model_tag = "latest"):
+def read_model(wandb_run, model_name, model_tag = "latest") -> tf.keras.models.Model:
     artifact = wandb_run.use_artifact(f'ml-p2/ml-p2/{model_name}:{model_tag}', type='model')
     artifact_dir = artifact.download()
     return tf.keras.models.load_model(artifact_dir)
